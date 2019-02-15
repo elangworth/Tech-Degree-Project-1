@@ -1,4 +1,5 @@
 //part one
+//store the player information in dictionaries
 
 let player1: [String: String] =
     ["Name": "Joe Smith",
@@ -108,6 +109,8 @@ let player18: [String: String] =
      "Experience": "Yes",
      "Guardian(s)": "Hyman and Rachel Krustofski"]
 
+//declare variables for the other dictionaries I will need to create from the above dictionaries
+
 var players: [[String: String]] = []
 var experiencedPlayers: [[String: String]] = []
 var inexperiencedPlayers: [[String: String]] = []
@@ -138,6 +141,9 @@ players.append(player16)
 players.append(player17)
 players.append(player18)
 
+//part two
+//It's time to break up the players into the experienced and inexperienced dictionaries.
+
 for obj in players {
     if obj["Experience"] == "Yes" {
         experiencedPlayers.append(obj)
@@ -146,6 +152,7 @@ for obj in players {
     }
     }
 
+// This Assigns players to teams. Each team has 6 players. If I had more players to assign, I would add additional else if statements and adjust the rest of the code accordingly.
 
 var numberOfExperiencedPlayers = 0
 var numberOfInexperiencedPlayers = 0
@@ -178,12 +185,32 @@ for player in inexperiencedPlayers {
 }
 theLeague = teamRaptors + teamSharks + teamDragon
 
-
-
-
-
-
-
+//part three
+//create loop to iterate over the teams so I can use string interpolation to create the letters
+//https://stackoverflow.com/questions/36367362/swift-for-loop-expression-type-string-string-is-ambiguous-without-more
+// helped me figure out how to get the values for the keys from the dictionary since teamRaptor["Name"] was not working
+var letters: [String] = []
+for obj in theLeague {
+    let guardian = (obj["Guardian(s)"])
+    let nameOfPlayer = (obj["Name"])
+    var teamName = ""
+    var practiceTime = ""
+    for _ in teamSharks {
+        teamName = "Sharks"
+        practiceTime == "March 17th at 3 PM."
+    }
+    for _ in teamDragon {
+        teamName = "Dragons"
+        practiceTime = "March 17th at 1 PM."
+    }
+    for _ in teamRaptors {
+        teamName = "Raptors"
+        "March 18th at 1 PM."
+    }
+  // looked at the optional documentation in swift
+    letters = [("Dear \(guardian ?? ""), \(nameOfPlayer ?? "") has been placed on team \(teamName). The \(teamName) have practice at \(practiceTime) Please have the players wear appropriate clothing, shin guards, and cleats. We are looking forward to have a great season. See you on the field.")]
+    print (letters)
+}
 
 
 
