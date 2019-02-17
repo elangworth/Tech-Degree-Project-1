@@ -3,9 +3,9 @@
 
 let player1: [String: String] =
     ["Name": "Joe Smith",
-    "Height": "42.0",
-    "Experience": "Yes",
-    "Guardian(s)": "Jim and Jan Smith"]
+     "Height": "42.0",
+     "Experience": "Yes",
+     "Guardian(s)": "Jim and Jan Smith"]
 
 let player2: [String: String] =
     ["Name": "Jill Tanner",
@@ -14,10 +14,10 @@ let player2: [String: String] =
      "Guardian(s)": "Clara Tanner"]
 
 let player3: [String: String] =
-["Name": "Bill Bon",
- "Height": "43.0",
- "Experience": "Yes",
- "Guardian(s)": "Sara and Jenny Bon"]
+    ["Name": "Bill Bon",
+     "Height": "43.0",
+     "Experience": "Yes",
+     "Guardian(s)": "Sara and Jenny Bon"]
 
 let player4: [String: String] =
     ["Name": "Eva Gordon",
@@ -41,7 +41,7 @@ let player7: [String: String] =
     ["Name": "Sammy Adams",
      "Height": "45.0",
      "Experience": "No",
-"Guardian(s)": "Jeff Adams"]
+     "Guardian(s)": "Jeff Adams"]
 
 let player8: [String: String] =
     ["Name": "Karl Saygan",
@@ -53,7 +53,7 @@ let player9: [String: String] =
     ["Name": "Suzane Greenberg",
      "Height": "44.0",
      "Experience": "Yes",
-"Guardian(s)": "Henrietta Dumas"]
+     "Guardian(s)": "Henrietta Dumas"]
 
 let player10: [String: String] =
     ["Name": "Sal Dali",
@@ -65,7 +65,7 @@ let player11: [String: String] =
     ["Name": "Joe Kavalier",
      "Height": "39.0",
      "Experience": "No",
-"Guardian(s)": "Sam and Elaine Kavalier"]
+     "Guardian(s)": "Sam and Elaine Kavalier"]
 
 let player12: [String: String] =
     ["Name": "Ben Finkelstein",
@@ -93,15 +93,15 @@ let player15: [String: String] =
 
 let player16: [String: String] =
     ["Name": "Phillip Helm",
-"Height": "44.0",
-"Experience": "Yes",
-"Guardian(s)": "Thomas Helm and Eva Jones"]
+     "Height": "44.0",
+     "Experience": "Yes",
+     "Guardian(s)": "Thomas Helm and Eva Jones"]
 
 let player17: [String: String] =
     ["Name": "Les Clay",
      "Height": "42.0",
      "Experience": "Yes",
-"Guardian(s)": "Wynonna Brown"]
+     "Guardian(s)": "Wynonna Brown"]
 
 let player18: [String: String] =
     ["Name": "Herschel Krustofski",
@@ -150,72 +150,71 @@ for obj in players {
     } else {
         inexperiencedPlayers.append(obj)
     }
-    }
+}
 
 // This Assigns players to teams. Each team has 6 players. If I had more players to assign, I would add additional else if statements and adjust the rest of the code accordingly.
 
+let teams = [teamSharks, teamRaptors, teamDragon]
+let experiencedPlayersPerTeam = experiencedPlayers.count / teams.count
+let inexperiencedPlayersPerTeam = inexperiencedPlayers.count / teams.count
+let playersPerTeam = experiencedPlayersPerTeam + inexperiencedPlayersPerTeam
 var numberOfExperiencedPlayers = 0
 var numberOfInexperiencedPlayers = 0
 
 for player in experiencedPlayers {
-    if numberOfExperiencedPlayers < 3 {
+    if numberOfExperiencedPlayers < experiencedPlayersPerTeam * 1 {
         teamDragon.append(player)
-        numberOfExperiencedPlayers += 1
-    } else if numberOfExperiencedPlayers < 6{
+    } else if numberOfExperiencedPlayers < experiencedPlayersPerTeam * 2 {
         teamSharks.append(player)
-        numberOfExperiencedPlayers += 1
     } else {
         teamRaptors.append(player)
-        numberOfExperiencedPlayers += 1
-   
     }
+    numberOfExperiencedPlayers += 1
 }
 
 for player in inexperiencedPlayers {
-    if numberOfInexperiencedPlayers < 3 {
+    if numberOfInexperiencedPlayers < inexperiencedPlayersPerTeam * 1 {
         teamDragon.append(player)
-        numberOfInexperiencedPlayers += 1
-    } else if numberOfInexperiencedPlayers < 6 {
+    } else if numberOfInexperiencedPlayers < inexperiencedPlayersPerTeam * 2 {
         teamSharks.append(player)
-        numberOfInexperiencedPlayers += 1
     } else {
         teamRaptors.append(player)
-        numberOfInexperiencedPlayers += 1
     }
+    numberOfInexperiencedPlayers += 1
 }
-theLeague = teamRaptors + teamSharks + teamDragon
 
+theLeague = teamRaptors + teamSharks + teamDragon
+//print(teamRaptors)
 //part three
 //create loop to iterate over the teams so I can use string interpolation to create the letters
 //https://stackoverflow.com/questions/36367362/swift-for-loop-expression-type-string-string-is-ambiguous-without-more
 // helped me figure out how to get the values for the keys from the dictionary since teamRaptor["Name"] was not working
 var letters: [String] = []
+var teamName = ""
+var practiceTime = ""
 for obj in theLeague {
     let guardian = (obj["Guardian(s)"])
     let nameOfPlayer = (obj["Name"])
-    var teamName = ""
-    var practiceTime = ""
-    for _ in teamSharks {
+    
+   if nameOfPlayer == "Karl Saygan" || nameOfPlayer == "Suzane Greenberg" || nameOfPlayer == "Diego Soto" || nameOfPlayer == "Sammy Adams" || nameOfPlayer == "Sal Dali" || nameOfPlayer == "Joe Kavalier" {
         teamName = "Sharks"
-        practiceTime == "March 17th at 3 PM."
+        practiceTime = "March 17th at 3 PM."
+     } else if nameOfPlayer == "Phillip Helm" || nameOfPlayer == "Les Clay" || nameOfPlayer == "Herschel Krustofski" || nameOfPlayer == "Ben Finkelstein" || nameOfPlayer == "Chloe Alaska" || nameOfPlayer == "Arnold Willis" {
+      teamName = "Raptors"
+      practiceTime = "March 18th at 1 PM."
+     } else {
+     teamName = "Dragons"
+     practiceTime = "March 17th at 1 PM."
     }
-    for _ in teamDragon {
-        teamName = "Dragons"
-        practiceTime = "March 17th at 1 PM."
+   
+    // looked at the optional documentation in swift
+    let bodyOfLetters = [("Dear \(guardian ?? ""), \(nameOfPlayer ?? "") has been placed on team \(teamName). The \(teamName) have practice on \(practiceTime) Please have the players wear appropriate clothing, shin guards, and cleats. We are looking forward to have a great season. See you on the field.")]
+
+
+    for obj in bodyOfLetters {
+        letters.append(obj)
     }
-    for _ in teamRaptors {
-        teamName = "Raptors"
-        "March 18th at 1 PM."
-    }
-  // looked at the optional documentation in swift
-    letters = [("Dear \(guardian ?? ""), \(nameOfPlayer ?? "") has been placed on team \(teamName). The \(teamName) have practice at \(practiceTime) Please have the players wear appropriate clothing, shin guards, and cleats. We are looking forward to have a great season. See you on the field.")]
-    print (letters)
+    
 }
-
-
-
-
-
-
-
+print(letters)
 
