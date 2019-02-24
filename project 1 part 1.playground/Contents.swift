@@ -158,29 +158,28 @@ let teams = [teamSharks, teamRaptors, teamDragon]
 let experiencedPlayersPerTeam = experiencedPlayers.count / teams.count
 let inexperiencedPlayersPerTeam = inexperiencedPlayers.count / teams.count
 let playersPerTeam = experiencedPlayersPerTeam + inexperiencedPlayersPerTeam
-var numberOfExperiencedPlayers = 0
-var numberOfInexperiencedPlayers = 0
-
+var counterExperiencedPlayers = 0
+var counterInexperiencedPlayers = 0
 for player in experiencedPlayers {
-    if numberOfExperiencedPlayers < experiencedPlayersPerTeam * 1 {
+    if counterExperiencedPlayers < experiencedPlayersPerTeam {
         teamDragon.append(player)
-    } else if numberOfExperiencedPlayers < experiencedPlayersPerTeam * 2 {
+    } else if counterExperiencedPlayers < experiencedPlayersPerTeam * experiencedPlayersPerTeam {
         teamSharks.append(player)
     } else {
         teamRaptors.append(player)
     }
-    numberOfExperiencedPlayers += 1
+    counterExperiencedPlayers += 1
 }
 
 for player in inexperiencedPlayers {
-    if numberOfInexperiencedPlayers < inexperiencedPlayersPerTeam * 1 {
+    if counterInexperiencedPlayers < inexperiencedPlayersPerTeam {
         teamDragon.append(player)
-    } else if numberOfInexperiencedPlayers < inexperiencedPlayersPerTeam * 2 {
+    } else if counterInexperiencedPlayers < inexperiencedPlayersPerTeam * inexperiencedPlayersPerTeam {
         teamSharks.append(player)
     } else {
         teamRaptors.append(player)
     }
-    numberOfInexperiencedPlayers += 1
+    counterInexperiencedPlayers += 1
 }
 
 theLeague = teamRaptors + teamSharks + teamDragon
@@ -216,5 +215,7 @@ for obj in theLeague {
     }
     
 }
-print(letters)
 
+for letter in letters{
+    print(letter)
+}
